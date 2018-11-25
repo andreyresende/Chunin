@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.erb": "erb",
+        "arvore.h": "c",
+        "fila.h": "c",
+        "time.h": "c"
+    }
+}

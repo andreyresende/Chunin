@@ -39,9 +39,25 @@ typedef struct{
     int tamanho;
 } t_lista;
 
+typedef struct luta{
+    struct luta* proximo;
+    struct luta* anterior;
+    Ninja* ninja_um;
+    Ninja* ninja_dois;
+    int atributo_usado;
+} t_luta;
+
+typedef struct{
+    t_luta* primeiro;
+    t_luta* ultimo;
+    int tamanho;
+} Registro;
+
 t_node* tree_create();
 
 void tree_helper(t_node* raiz, int niveis, int altura_desejada);
+
+void tree_print_preorder(t_node* root);
 
 Ninja* fight(Ninja* ninja_one, Ninja* ninja_two, int attribute);
 
@@ -54,6 +70,12 @@ Ninja* ninja_create(char* nome, char* elemento, int ninjutsu, int genjutsu, int 
 void ninja_free(Ninja* ninja);
 
 void tela_inicial();
+
+void tela_vitoria(int etapa);
+
+void tela_derrota(int etapa);
+
+void tela_final();
 
 int visita_folha(t_node* raiz, int count, t_lista* lista);/* Basicamente eu chamo a funcao com count = 0 e ele vai descendo
                                                              com esse 0 e criando uma variavel de comparacao a cada no,
@@ -83,6 +105,14 @@ void remove_lista(t_lista* lista);
 
 void jogo(t_node* tree, Ninja* jogador);
 
-int octogono(t_node* tree, Ninja* jogador, int etapa, int cooldown);
+int octogono(Registro* registro,t_node* tree, Ninja* jogador, int etapa, int cooldown);
 
-int octogono_auxiliar(t_node* tree, Ninja* jogador, Ninja* inimigo, int etapa, int cooldown);
+int octogono_auxiliar(Registro* registro,t_node* tree, Ninja* jogador, Ninja* inimigo, int etapa, int cooldown);
+
+Registro* aloca_registro();
+
+t_luta* aloca_luta(Ninja* ninja_one, Ninja* ninja_two, int atributo);
+
+void insere_luta(Registro* registro, Ninja* ninja_one, Ninja* ninja_two, int atributo);
+
+void remove_registro(Registro* registro);
